@@ -1,0 +1,49 @@
+name: Net scan test
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: SETUP .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.401'
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Install net sonar-scanner
+        run: |
+          dotnet_sonnarscanner_path=$HOME/.dotnet/tools/dotnet-sonarscanner
+          if [ -e "$dotnet_sonnarscanner_path" ]; then
+            echo "dotnet-sonnarscanner installed"
+          else
+            dotnet tool install --global dotnet-sonarscanner --version 5.8.0
+          fi
+          # cd /.
+          # ls -la
+          # cd root/.dotnet/tools
+          #ls -la
+          # whereis dotnet
+          # echo "the home variable $HOME"
+          # dotnet tool uninstall --global dotnet-sonarscanner
+
+      - name: Install dependencies
+        run: dotnet restore
+        working-directory: CXM.Acciones/
+
+      - name: Sonar scan .net
+        working-directory: CXM.Acciones/
+        run: |
+          java -version
+          # $HOME/.dotnet/tools/dotnet-sonarscanner begin /k:"Dotnet-test-j" /d:sonar-login="6701540e6f9e9f039ba8038f8f46bd2b2ad6bd58" /d:sonar.host.url="${{ env.URL_SONAR_WAS }}"
+          $HOME/.dotnet/tools/dotnet-sonarscanner begin /k:"Dotnet-test-jay" /d:sonar-login="sqp_6781d9891289f8dfacfe1a1fce36bda8569018ed" /d:sonar.host.url="http://192.168.0.113:9000"
