@@ -42,7 +42,7 @@ jobs:
         working-directory: CXM.Acciones/
 
       - name: Sonar scan .net
-        working-directory: CXM.Acciones/
+        working-directory: BancoTests/
         run: |
           java -version
           # $HOME/.dotnet/tools/dotnet-sonarscanner begin /k:"Dotnet-test-j" /d:sonar-login="6701540e6f9e9f039ba8038f8f46bd2b2ad6bd58" /d:sonar.host.url="${{ env.URL_SONAR_WAS }}"
