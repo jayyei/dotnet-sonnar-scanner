@@ -48,3 +48,5 @@ jobs:
           java -version
           # $HOME/.dotnet/tools/dotnet-sonarscanner begin /k:"Dotnet-test-j" /d:sonar-login="6701540e6f9e9f039ba8038f8f46bd2b2ad6bd58" /d:sonar.host.url="${{ env.URL_SONAR_WAS }}"
           $HOME/.dotnet/tools/dotnet-sonarscanner begin /k:"Dotnet-test-jay" /d:sonar-login="sqp_6781d9891289f8dfacfe1a1fce36bda8569018ed" /d:sonar.host.url="http://192.168.0.113:9000"
+          dotnet build
+          $HOME/.dotnet/tools/dotnet-sonarscanner end /d:sonar.login="sqp_6781d9891289f8dfacfe1a1fce36bda8569018ed"
