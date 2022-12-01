@@ -38,8 +38,9 @@ jobs:
           # dotnet tool uninstall --global dotnet-sonarscanner
 
       - name: Install dependencies
+        if: false
         run: dotnet restore
-        working-directory: CXM.Acciones/
+        working-directory: BancoTests/
 
       - name: Sonar scan .net
         working-directory: BancoTests/
